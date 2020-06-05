@@ -1,0 +1,35 @@
+@model IEnumerable<AppWeb.Models.ProdutoViewModel>
+@{
+    ViewData["Title"] = "Listar produtos";
+}
+
+<h2>Listar produtos</h2> 
+<a class="btn btn-primary" href="~/Produto/New">Criar</a>
+<div class="row" style="margin-bottom:10px">
+
+</div>
+<table  class="marginTop table table-striped table-dark">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Nome</th>
+      <th scope="col">Valor</th>
+      <th>Editar | Deletar</th>
+    </tr>
+  </thead>
+  <tbody>
+     @foreach (var item in Model)
+     {
+        <tr>
+            <td>@item.IdProduto</td>
+            <td>@item.Nome</td>
+            <td>@item.Valor</td>
+            <td>
+              <a href="~/Produto/Editar/@item.IdProduto" >Editar</a> |
+              <a href="~/Produto/Delete/@item.IdProduto" >Deletar</a>
+            </td>
+        </tr>
+     }
+  </tbody>
+</table>
+
