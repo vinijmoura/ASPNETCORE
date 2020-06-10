@@ -1,7 +1,7 @@
 # Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 
-name: Build and deploy ASP.Net Core app to Azure Web App - webapp-sexta
+name: Build and deploy ASP.Net Core
 
 on:
   push:
@@ -26,10 +26,13 @@ jobs:
     - name: dotnet publish
       run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
 
+    - name: Azure Login
+      uses: Azure/login@v1.1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+
     - name: Deploy to Azure Web App
       uses: azure/webapps-deploy@v1
       with:
-        app-name: 'webapp-sexta'
-        slot-name: 'production'
-        publish-profile: ${{ secrets.AzureAppService_PublishProfile_6507576158b64ac79b81f804002e9957 }}
+        app-name: 'ghaaspnetcore'
         package: ${{env.DOTNET_ROOT}}/myapp 
